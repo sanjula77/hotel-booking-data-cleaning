@@ -48,7 +48,7 @@
 
 ## 4. 📉 Final Dataset Statistics
 
-- **Final Shape**: _[UPDATE after cleaning]_ rows × 33 columns (added `arrival_date` & `total_guests`)
+- **Final Shape**: 87210 rows × 35 columns (added `arrival_date` & `total_guests`)
 - **Missing Values**: 0 (after imputation)
 - **No duplicates**
 - **No invalid numeric values**
