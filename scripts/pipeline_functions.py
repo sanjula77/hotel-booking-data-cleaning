@@ -105,3 +105,32 @@ def clean_dataset(df):
     df = engineer_features(df)
     df = validate_data(df)
     return df
+
+def generate_quality_metrics(df, name="Data"):
+    """Generate basic data quality metrics."""
+    print(f"\n📊 Quality Report for {name}")
+    metrics = {}
+
+    # 1. Missing values
+    missing = df.isnull().mean() * 100
+    metrics['% Missing Columns'] = (missing > 0).sum()
+
+    # 2. Duplicate rows
+    metrics['Duplicate Rows'] = df.duplicated().sum()
+
+    # 3. Zero-guest rows
+    df['total_guests'] = df['adults'] + df['children'] + df['babies']
+    metrics['Zero-Guest Rows'] = (df['total_guests'] <= 0).sum()
+
+    # 4. Outliers in adr
+    Q1 = df['adr'].quantile(0.25)
+    Q3 = df['adr'].quantile(0.75)
+    IQR = Q3 - Q1
+    outliers = df[(df['adr'] < Q1 - 1.5 * IQR) | (df['adr'] > Q3 + 1.5 * IQR)]
+    metrics['ADR Outliers'] = len(outliers)
+
+    # Display
+    for k, v in metrics.items():
+        print(f"{k}: {v}")
+
+    return metrics
