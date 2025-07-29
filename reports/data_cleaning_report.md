@@ -45,21 +45,24 @@
 
 ---
 
-## 📊 Expected Outcomes Summary Table
+## 4. 📊 Expected Outcomes Summary Table
 
-| Aspect             | Before Cleaning                                                            | After Cleaning                                                 |
-| ------------------ | -------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| 🔍 Missing Values  | 4 columns with missing values (`children`, `country`, `agent`, `company`) | All missing values handled (via imputation or logic)           |
-| 📋 Duplicates      | 31,994 exact duplicate records                                            | All exact duplicates removed                                   |
-| 📈 Outliers        | Extreme values in `adr` (up to 5400) and `lead_time` (up to 737)           | Outliers capped using IQR or Z-score method                    |
-| 🔤 Inconsistencies | Mixed category labels (e.g., `'Undefined'`, typos) and split date fields   | Labels standardized, date columns combined into `arrival_date` |
-| ❌ Invalid Rows    | 180 rows with `total_guests = 0` (illogical)                               | All invalid rows removed                                       |
-| 📅 Date Columns    | Date values stored in 3 separate columns (`year`, `month`, `day`)          | Unified as a proper `datetime` object (`arrival_date`)         |
-| ✅ Final Result    | Raw, messy dataset with inconsistencies, missingness, and redundancy       | Clean, consistent, analysis-ready dataset with 87,210 rows     |
+This section summarizes the key issues identified before cleaning and the improvements made after the data cleaning process.
+
+| 🧩 **Aspect**         | 🔍 **Before Cleaning**                                                                 | ✅ **After Cleaning**                                               |
+|-----------------------|-----------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| **Missing Values**     | Present in ~4 columns:<br>• `children`<br>• `country`<br>• `agent`<br>• `company`       | All missing values imputed:<br>• Logic-based or statistical methods applied |
+| **Duplicates**         | ~31,994 exact duplicate rows                                                           | All exact duplicates removed                                        |
+| **Outliers**           | Extreme values in:<br>• `adr` (up to 5400)<br>• `lead_time` (up to 737)                | Outliers treated using:<br>• IQR capping<br>• Z-score analysis      |
+| **Categorical Issues** | Inconsistent labels:<br>• `'Undefined'`<br>• Case variations and typos                 | All categories standardized:<br>• Replaced with `'Other'` or cleaned |
+| **Invalid Rows**       | 180 bookings with `total_guests = 0` (illogical combinations)                          | All such rows removed                                               |
+| **Date Columns**       | Arrival date split across:<br>• `year`, `month`, `day`                                 | Combined into single `arrival_date` column in datetime format       |
+| **Overall Quality**    | Raw, inconsistent, and error-prone dataset                                             | Cleaned, structured, and analysis-ready dataset with ~118,000 rows  |
 
 ---
 
-## 4. 📉 Final Dataset Statistics
+
+## 5. 📉 Final Dataset Statistics
 
 - **Final Shape**: 87,210 rows × 35 columns (added `arrival_date` & `total_guests`)
 - **Missing Values**: 0 (after imputation)
@@ -69,7 +72,7 @@
 
 ---
 
-## 5. 🔍 Assumptions Made During Cleaning
+## 6. 🔍 Assumptions Made During Cleaning
 
 - If `children` is missing → assume 0
 - If `agent` or `company` is missing → assume booking was made directly
